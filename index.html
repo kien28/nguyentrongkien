@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tỏ tình bá đạo</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body {
+      background: linear-gradient(to right,#ffecd2,#fcb69f);
+      height:100vh;overflow:hidden;
+      display:flex;justify-content:center;align-items:center;
+      font-family:'Arial',sans-serif;
+    }
+    .container {
+      text-align:center;
+      background:rgba(255,255,255,0.9);
+      padding:30px;border-radius:15px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.2);
+      animation:fadeIn 1s;
+      max-width:90vw;
+    }
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .hidden{display:none;}
+    h1{font-size:2rem;color:#d9534f;margin-bottom:15px;}
+    img{max-width:280px;border-radius:12px;margin-bottom:15px;animation:popUp 0.8s;}
+    @keyframes popUp{0%{transform:scale(0.5);opacity:0;}100%{transform:scale(1);opacity:1}}
+    .name-buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+    button {
+      padding:10px 18px;
+      font-size:14px;
+      border:none;border-radius:8px;
+      background:linear-gradient(145deg,#ff7675,#fc5c65);
+      color:#fff;cursor:pointer;
+      transition:transform 0.3s,background 0.3s;
+    }
+    button:hover{transform:scale(1.1);background:linear-gradient(145deg,#fc5c65,#ff7675);}
+    #noBtn{position:relative;}
+  </style>
+</head>
+<body>
+  <div class="container" id="main">
+    <h1>Em có yêu tui không</h1>
+    <img src="https://i.postimg.cc/brYFnmcm/4634212f6d84a54be4b58775ba1da53c.gif" id="mainImg">
+    <div>
+      <button onclick="showNames()">Yêu nhiều vô cùng lun</button>
+      <button id="noBtn" onmouseover="moveButton()">Không</button>
+    </div>
+  </div>
+
+  <audio id="bgm" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/09/audio_8dd49cceba.mp3?filename=romantic-love-145009.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="cw" loop>
+    <source src="https://dl.sndup.net/mn62/Careless%20Whisper.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const allNames = [
+      "Nam","Minh","Hùng","Tuấn","Khánh","Đức","Kiệt","Vinh","Nguyên","Thắng","Long","An","Dũng","Quân","Lâm","Tài","Trí","Hoàng",
+      "Toàn","Phong","Khoa","Tú","Sơn","Việt","Bảo","Phúc","Thiện","Đạt","Hiếu","Nghĩa","Khôi","Duy","Tâm","Hải","Hòa","Tín","Hưng","Phát","Chí",
+      "Luân","Thịnh","Lộc","Đăng","Quốc","Nhân","Anh","Tiến","Trung","Cường","Hạo","Thái","Quý","Bình","Tường","Thanh","Tấn","Ngọc","Bách","Khang",
+      "Vũ","Hậu","Thi","Phước","Giang","Lương","Đoàn","Tùng","Cao","Thọ","Phan","Nam Anh","Dũng Anh","Trường","Trọng","Phú","Viễn","Khương","Tân",
+      "Đình","Bình Minh","Bảo Nam","Đại","Hoàng Anh","Thế","Viên","Đức Anh","Phước Hưng","Khôi Nguyên","Hoàng Dương","Gia Huy","Tuấn Anh"
+    ];
+    // Thêm 'Kiên' vào ngẫu nhiên, không phải đầu
+    const insertAt = Math.floor(Math.random() * (allNames.length - 1)) + 1;
+    allNames.splice(insertAt, 0, "Kiên");
+
+    function moveButton() {
+      const btn = document.getElementById('noBtn');
+      const x=Math.random()*(window.innerWidth-120);
+      const y=Math.random()*(window.innerHeight-60);
+      btn.style.position="absolute";btn.style.left=x+'px';btn.style.top=y+'px';
+    }
+
+    function showNames() {
+      const m=document.getElementById('main');
+      let html=`<h1>Tìm tên người em yêu giữa đám cỏ dại 🥰</h1><div class="name-buttons">`;
+      allNames.forEach(n => html+=`<button onclick="checkName('${n}')">${n}</button>`);
+      html+=`</div>`;
+      m.innerHTML=html;
+    }
+
+    function checkName(name) {
+      if(name==="Kiên") {
+        document.getElementById('bgm').pause();
+        document.getElementById('cw').play();
+        document.getElementById('main').innerHTML = `
+          <h1>Biết ngay mà! Kiên cũng yêu em! 😘</h1>
+          <img src="https://i.postimg.cc/vmKTBbMy/dcfcf8d07ef33ca5ca89800dc5cedd38.gif" alt="Mèo xanh 6 chân bắn tim">
+        `;
+      } else {
+        alert("Sai rồi nha 😜");
+      }
+    }
+  </script>
+</body>
+</html>
